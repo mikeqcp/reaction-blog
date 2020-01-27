@@ -41,6 +41,7 @@ const CreatedDate = styled.div`
   ${fontSize(-.2)};
 `;
 const PostContent = styled.article`
+  margin-top: ${rhythm(2)};
   text-align: justify;
 `;
 

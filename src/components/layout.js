@@ -17,9 +17,11 @@ const Footer = styled.footer`
   text-align: center;
   padding: 0 20px 80px 0;
 `;
+
 const Content = styled.div`
-  padding: ${rhythm(1.5)} ${rhythm(3 / 4)} ${rhythm(1.5)} ${rhythm(3 / 4)};
   min-height: calc(100vh - 42px);
+  padding-top: ${rhythm(1.5)};
+  padding-bottom: ${rhythm(1.5)};
   
   pre {
     font-size: ${rhythm(.6)};
@@ -28,6 +30,8 @@ const Content = styled.div`
 `;
 
 const WidthWrapper = styled.div`
+  padding-left:  ${rhythm(3 / 4)};
+  padding-right:  ${rhythm(3 / 4)};
   margin-left: auto;
   margin-right: auto;
   max-width: ${rhythm(24)};
