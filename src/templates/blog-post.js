@@ -1,115 +1,65 @@
 import React from 'react'
 import Helmet from 'react-helmet'
-import { Link } from 'gatsby'
+import { Link as GatsbyLink } from 'gatsby'
+import styled from 'styled-components';
 import get from 'lodash/get'
 import { graphql } from 'gatsby'
 
-import Bio from '../components/Bio'
 import Layout from '../components/layout'
-import { rhythm, scale } from '../utils/typography'
+import { fontSize, rhythm, scale } from '../utils/typography'
+import { themeColor } from '../utils/theme/getters'
+import arrowIcon from './arrow_back.svg';
+
+const Title = styled.h1``;
+
+const ArrowIcon = styled.img.attrs(() => ({ src: arrowIcon}))`
+  margin: 0;
+  vertical-align: middle;
+  margin-bottom: ${rhythm(.1)};
+`;
+
+const BackToPosts = styled(GatsbyLink)`
+  display: inline-block;
+  margin-bottom: ${rhythm(1)};
+  vertical-align: middle;
+`;
+const Hero = styled.div`
+  background-color: ${themeColor('primary')};
+  background-image: url("${props => props.image}?w=2000");
+  background-size: cover;
+  background-position: center;
+  margin-bottom: ${rhythm(0.6)};
+  position: relative;
+  width: 100%;
+  height: ${rhythm(10)};
+`;
+const CreatedDate = styled.div`
+  display: block;
+  margin-bottom: ${rhythm(.6)};
+  margin-top: ${rhythm(-.6)};
+  ${fontSize(-.2)};
+`;
+const PostContent = styled.article`
+  text-align: justify;
+`;
 
 class BlogPostTemplate extends React.Component {
   render() {
     const post = this.props.data.cosmicjsPosts
-    const siteTitle = get(
-      this.props,
-      'data.cosmicjsSettings.metadata.site_title'
-    )
+    const siteTitle = get(this.props.data, 'cosmicjsSettings.metadata.site_title')
     const location = get(this, 'props.location')
-    const { previous, next } = this.props.pageContext
 
     return (
       <Layout location={location}>
-        <style>
-          {`
-          .post-content {
-            text-align: justify;
-          }
-          .post-hero {
-            width: calc(100% + ${rhythm(8)});
-            margin-left: ${rhythm(-4)};
-            height: ${rhythm(18)};
-          }
-          @media (max-width: ${rhythm(32)}) {
-            .post-hero {
-              width: calc(100% + ${rhythm((3 / 4) * 2)});
-              margin-left: ${rhythm(-3 / 4)};
-              height: ${rhythm(13)};
-            }
-          }
-        `}
-        </style>
         <Helmet title={`${post.title} | ${siteTitle}`} />
-        <div
-          style={{
-            marginTop: rhythm(1.4),
-          }}
-        >
-          <Link to="/">← Back to Posts</Link>
-        </div>
-        <h1
-          style={{
-            marginTop: rhythm(1),
-          }}
-        >
-          {post.title}
-        </h1>
-        <p
-          style={{
-            ...scale(-1 / 5),
-            display: 'block',
-            marginBottom: rhythm(0.6),
-            marginTop: rhythm(-0.6),
-          }}
-        >
-          {post.created}
-        </p>
-        <div
-          className="post-hero"
-          style={{
-            backgroundColor: '#007ACC',
-            backgroundImage: `url("${post.metadata.hero.imgix_url}?w=2000")`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            marginBottom: rhythm(0.6),
-            position: 'relative',
-          }}
-        />
-        <div
-          className="post-content"
-          dangerouslySetInnerHTML={{ __html: post.content }}
-        />
-        <hr
-          style={{
-            marginBottom: rhythm(1),
-          }}
-        />
 
-        <ul
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'space-between',
-            listStyle: 'none',
-            padding: 0,
-          }}
-        >
-          {previous && (
-            <li>
-              <Link to={`posts/${previous.slug}`} rel="prev">
-                ← {previous.title}
-              </Link>
-            </li>
-          )}
+        <BackToPosts to="/"><ArrowIcon /> Back to Posts</BackToPosts>
 
-          {next && (
-            <li>
-              <Link to={`posts/${next.slug}`} rel="next">
-                {next.title} →
-              </Link>
-            </li>
-          )}
-        </ul>
+        <Hero image={post.metadata.hero.imgix_url} />
+
+        <Title>{post.title}</Title>
+        <CreatedDate>{post.created}</CreatedDate>
+        <PostContent dangerouslySetInnerHTML={{ __html: post.content }} />
       </Layout>
     )
   }

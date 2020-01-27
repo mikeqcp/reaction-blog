@@ -11,7 +11,6 @@ import 'typeface-merriweather'
 import { BigHeader } from './bigHeader'
 import { SmallHeader } from './smallHeader'
 import { theme } from '../utils/theme/theme'
-import { themeColor } from '../utils/theme/getters'
 import Bio from './Bio'
 
 const Footer = styled.footer`

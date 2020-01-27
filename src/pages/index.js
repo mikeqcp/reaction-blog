@@ -1,12 +1,18 @@
 import React from 'react'
 import { Link } from 'gatsby'
+import styled from 'styled-components';
 import get from 'lodash/get'
 import Helmet from 'react-helmet'
 import { graphql } from 'gatsby'
 
-import Bio from '../components/Bio'
 import Layout from '../components/layout'
 import { rhythm } from '../utils/typography'
+
+const ItemBox = styled.div`
+  &:not(:first-child) {
+    border-top: 1px solid;
+  }
+`;
 
 class BlogIndex extends React.Component {
   render() {
@@ -23,7 +29,7 @@ class BlogIndex extends React.Component {
         {posts.map(({ node }) => {
           const title = get(node, 'title') || node.slug
           return (
-            <div key={node.slug}>
+            <ItemBox key={node.slug}>
               <h3
                 style={{
                   marginBottom: rhythm(1 / 4),
@@ -37,7 +43,7 @@ class BlogIndex extends React.Component {
               <p
                 dangerouslySetInnerHTML={{ __html: node.metadata.description }}
               />
-            </div>
+            </ItemBox>
           )
         })}
       </Layout>

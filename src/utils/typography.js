@@ -31,7 +31,8 @@ theme.overrideThemeStyles = () => ({
   },
 
   body: {
-    color: defaultTheme.colors.white
+    backgroundColor: defaultTheme.colors.white,
+    color: defaultTheme.colors.paragraph
   },
 
   'a.gatsby-resp-image-link': {

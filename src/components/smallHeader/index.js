@@ -12,6 +12,7 @@ export const SmallHeader = ({ title }) => (
       marginRight: 'auto',
       maxWidth: rhythm(24),
       paddingTop: `${rhythm(1.5)}`,
+      textAlign: 'right'
     }}
   >
     <Link
