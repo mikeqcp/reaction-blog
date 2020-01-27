@@ -1,15 +1,47 @@
 import Typography from 'typography'
-import Wordpress2016 from 'typography-theme-wordpress-2016'
+import theme from 'typography-theme-fairy-gates'
+import { css } from 'styled-components'
+import { theme as defaultTheme } from '../utils/theme/theme';
 
-Wordpress2016.overrideThemeStyles = () => ({
+theme.overrideThemeStyles = () => ({
+  h1: {
+    color: defaultTheme.colors.header,
+  },
+
+  h2: {
+    color: defaultTheme.colors.header,
+  },
+
+  h3: {
+    color: defaultTheme.colors.header,
+  },
+
+  small: {
+    color: defaultTheme.colors.header,
+  },
+
+  p: {
+    color: defaultTheme.colors.paragraph,
+  },
+
+  a: {
+    color: 'inherit',
+    textShadow: 'none',
+    backgroundImage: 'none'
+  },
+
+  body: {
+    color: defaultTheme.colors.white
+  },
+
   'a.gatsby-resp-image-link': {
-    boxShadow: 'none',
+    boxShadow: 'none'
   },
 })
 
-delete Wordpress2016.googleFonts
+delete theme.googleFonts
 
-const typography = new Typography(Wordpress2016)
+const typography = new Typography(theme)
 
 // Hot reload typography in development.
 if (process.env.NODE_ENV !== 'production') {
@@ -19,3 +51,8 @@ if (process.env.NODE_ENV !== 'production') {
 export default typography
 export const rhythm = typography.rhythm
 export const scale = typography.scale
+
+export const fontSize = scale => css`
+  font-size: ${typography.scale(scale).fontSize};
+  line-height: ${typography.scale(scale).lineHeight};
+`;

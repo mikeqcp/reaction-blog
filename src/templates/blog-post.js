@@ -15,7 +15,6 @@ class BlogPostTemplate extends React.Component {
       this.props,
       'data.cosmicjsSettings.metadata.site_title'
     )
-    const author = get(this, 'props.data.cosmicjsSettings.metadata')
     const location = get(this, 'props.location')
     const { previous, next } = this.props.pageContext
 
@@ -85,7 +84,6 @@ class BlogPostTemplate extends React.Component {
             marginBottom: rhythm(1),
           }}
         />
-        <Bio settings={author} />
 
         <ul
           style={{
@@ -135,11 +133,6 @@ export const pageQuery = graphql`
     cosmicjsSettings(slug: { eq: "general" }) {
       metadata {
         site_title
-        author_name
-        author_bio
-        author_avatar {
-          imgix_url
-        }
       }
     }
   }

@@ -1,23 +1,34 @@
 import React from 'react'
 import { rhythm } from '../utils/typography'
+import styled from 'styled-components'
+
+const Container = styled.div`
+  display: flex;
+  margin-bottom: ${rhythm(2)};
+`;
+
+const Avatar = styled.img`
+  margin-right: ${rhythm(1 / 2)};
+  margin-bottom: 0;
+  width: ${rhythm(2)};
+  height: ${rhythm(2)};
+  border-radius: 50%;
+`
+
+const Text = styled.div`
+  text-align: left;
+  
+  p {
+    margin-bottom: 0;
+  }
+`;
 
 export default ({ settings }) => (
-  <div
-    style={{
-      display: 'flex',
-      marginBottom: rhythm(2.5),
-    }}
-  >
-    <img
+  <Container>
+    <Avatar
       src={settings.author_avatar.imgix_url}
       alt={settings.author_name}
-      style={{
-        marginRight: rhythm(1 / 2),
-        marginBottom: 0,
-        width: rhythm(2),
-        height: rhythm(2),
-      }}
     />
-    <div dangerouslySetInnerHTML={{ __html: settings.author_bio }} />
-  </div>
+    <Text dangerouslySetInnerHTML={{ __html: settings.author_bio }} />
+  </Container>
 )
