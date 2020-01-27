@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import get from 'lodash/get'
 import { graphql } from 'gatsby'
 import Prism from 'prismjs';
+import Image from 'gatsby-image';
 
 import Layout from '../components/layout'
 import { fontSize, rhythm, scale } from '../utils/typography'
@@ -24,11 +25,7 @@ const BackToPosts = styled(GatsbyLink)`
   margin-bottom: ${rhythm(1)};
   vertical-align: middle;
 `;
-const Hero = styled.div`
-  background-color: ${themeColor('primary')};
-  background-image: url("${props => props.image}?w=2000");
-  background-size: cover;
-  background-position: center;
+const Hero = styled(Image)`
   margin-bottom: ${rhythm(0.6)};
   position: relative;
   width: 100%;
@@ -64,7 +61,7 @@ class BlogPostTemplate extends React.Component {
 
         <BackToPosts to="/"><ArrowIcon /> Back to Posts</BackToPosts>
 
-        <Hero image={post.metadata.hero.imgix_url} />
+        <Hero fluid={post.metadata.hero.imgix.childImageSharp.fluid} />
 
         <Title>{post.title}</Title>
         <CreatedDate>{post.created}</CreatedDate>
@@ -85,7 +82,14 @@ export const pageQuery = graphql`
       created(formatString: "MMMM DD, YYYY")
       metadata {
         hero {
-          imgix_url
+          imgix {
+              childImageSharp {
+                  fluid(maxWidth: 1000) {
+                      # Choose either the fragment including a small base64ed image, a traced placeholder SVG, or one without.
+                      ...GatsbyImageSharpFluid
+                  }
+              }
+          }
         }
       }
     }

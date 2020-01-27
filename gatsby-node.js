@@ -1,3 +1,5 @@
+const { createRemoteFileNode } = require('gatsby-source-filesystem');
+
 const each = require('lodash/each')
 const Promise = require('bluebird')
 const path = require('path')
@@ -25,7 +27,7 @@ exports.createPages = ({ graphql, actions }) => {
               }
             }
           }
-        `
+        `,
       ).then(result => {
         if (result.errors) {
           console.log(result.errors)
@@ -33,11 +35,11 @@ exports.createPages = ({ graphql, actions }) => {
         }
 
         // Create blog posts pages.
-        const posts = result.data.allCosmicjsPosts.edges;
+        const posts = result.data.allCosmicjsPosts.edges
 
         each(posts, (post, index) => {
-          const next = index === posts.length - 1 ? null : posts[index + 1].node;
-          const previous = index === 0 ? null : posts[index - 1].node;
+          const next = index === posts.length - 1 ? null : posts[index + 1].node
+          const previous = index === 0 ? null : posts[index - 1].node
 
           createPage({
             path: `posts/${post.node.slug}`,
@@ -49,7 +51,33 @@ exports.createPages = ({ graphql, actions }) => {
             },
           })
         })
-      })
+      }),
     )
   })
+}
+
+exports.onCreateNode = async ({
+                                node,
+                                actions: { createNode },
+                                store,
+                                cache,
+                                createNodeId,
+                              }) => {
+  if (
+    node.internal.type === 'CosmicjsPosts' &&
+    node.metadata.hero.imgix_url !== null
+  ) {
+    let fileNode = await createRemoteFileNode({
+      url: node.metadata.hero.imgix_url, // string that points to the URL of the image
+      parentNodeId: node.id, // id of the parent node of the fileNode you are going to create
+      createNode, // helper function in gatsby-node to generate the node
+      createNodeId, // helper function in gatsby-node to generate the node id
+      cache, // Gatsby's cache
+      store, // Gatsby's redux store
+    })
+    // if the file was created, attach the new node to the parent node
+    if (fileNode) {
+      node.metadata.hero.imgix___NODE = fileNode.id
+    }
+  }
 }
