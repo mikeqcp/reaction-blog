@@ -4,6 +4,7 @@ import { Link as GatsbyLink } from 'gatsby'
 import styled from 'styled-components';
 import get from 'lodash/get'
 import { graphql } from 'gatsby'
+import Prism from 'prismjs';
 
 import Layout from '../components/layout'
 import { fontSize, rhythm, scale } from '../utils/typography'
@@ -36,16 +37,23 @@ const Hero = styled.div`
 const CreatedDate = styled.div`
   display: block;
   margin-bottom: ${rhythm(.6)};
-  margin-top: ${rhythm(-.6)};
+  margin-top: ${rhythm(-.3)};
   ${fontSize(-.2)};
 `;
 const PostContent = styled.article`
   text-align: justify;
 `;
 
+const formatCode = html => html.replace(/<pre>/g, '<pre class="language-javascript">');
+
 class BlogPostTemplate extends React.Component {
+  componentDidMount() {
+    document.querySelectorAll('pre').forEach(codeBlock => Prism.highlightElement(codeBlock));
+  }
+
   render() {
     const post = this.props.data.cosmicjsPosts
+
     const siteTitle = get(this.props.data, 'cosmicjsSettings.metadata.site_title')
     const location = get(this, 'props.location')
 
@@ -59,7 +67,7 @@ class BlogPostTemplate extends React.Component {
 
         <Title>{post.title}</Title>
         <CreatedDate>{post.created}</CreatedDate>
-        <PostContent dangerouslySetInnerHTML={{ __html: post.content }} />
+        <PostContent dangerouslySetInnerHTML={{ __html: formatCode(post.content) }} />
       </Layout>
     )
   }
