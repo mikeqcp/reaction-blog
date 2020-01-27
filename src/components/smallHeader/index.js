@@ -20,6 +20,7 @@ export const SmallHeader = ({ title }) => (
         boxShadow: 'none',
         textDecoration: 'none',
         color: 'inherit',
+        marginRight: rhythm(3 / 4),
       }}
       to={'/'}
     >
