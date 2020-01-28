@@ -1,11 +1,8 @@
 {
-  "name": "gatsby-blog-cosmicjs",
-  "description": "Gatsby Blog Cosmic JS",
+  "name": "reaction-blog",
+  "description": "Reaction blog",
   "version": "2.0.0",
-  "author": "Jazib Sawar <jazibsawar@gmail.com>",
-  "bugs": {
-    "url": "https://github.com/jazibsawar/gatsby-blog-cosmicjs/issues"
-  },
+  "author": "Michal P <mikeqcp@gmail.com>",
   "dependencies": {
     "dotenv": "^8.2.0",
     "gatsby": "^2.19.5",

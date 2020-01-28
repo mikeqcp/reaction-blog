@@ -20,12 +20,18 @@ class BlogIndex extends React.Component {
       this,
       'props.data.cosmicjsSettings.metadata.site_title'
     )
+    const siteDescription = get(
+      this,
+      'props.data.cosmicjsSettings.metadata.site_description'
+    )
     const posts = get(this, 'props.data.allCosmicjsPosts.edges')
     const location = get(this, 'props.location')
 
     return (
       <Layout location={location}>
-        <Helmet title={siteTitle} />
+        <Helmet title={siteTitle} >
+          <meta name="description" content={siteDescription} />
+        </Helmet>
         {posts.map(({ node }) => {
           const title = get(node, 'title') || node.slug
           return (
@@ -70,6 +76,7 @@ export const pageQuery = graphql`
     cosmicjsSettings(slug: { eq: "general" }) {
       metadata {
         site_title
+        site_description
       }
     }
   }

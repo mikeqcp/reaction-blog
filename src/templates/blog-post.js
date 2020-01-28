@@ -57,9 +57,11 @@ class BlogPostTemplate extends React.Component {
 
     return (
       <Layout location={location}>
-        <Helmet title={`${post.title} | ${siteTitle}`} />
+        <Helmet title={`${post.title} | ${siteTitle}`}>
+          <meta name="description" content={post.metadata.description} />
+        </Helmet>
 
-        <BackToPosts to="/"><ArrowIcon /> Back to Posts</BackToPosts>
+        <BackToPosts to="/"><ArrowIcon />Back to Posts</BackToPosts>
 
         <Hero fluid={post.metadata.hero.imgix.childImageSharp.fluid} />
 
@@ -81,6 +83,7 @@ export const pageQuery = graphql`
       title
       created(formatString: "MMMM DD, YYYY")
       metadata {
+        description
         hero {
           imgix {
               childImageSharp {
