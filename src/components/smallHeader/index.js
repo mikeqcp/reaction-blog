@@ -5,14 +5,14 @@ import React from 'react'
 export const SmallHeader = ({ title }) => (
   <h3
     style={{
-      fontFamily: 'Montserrat, sans-serif',
       marginTop: 0,
       marginBottom: rhythm(-1),
       marginLeft: 'auto',
       marginRight: 'auto',
       maxWidth: rhythm(24),
       paddingTop: `${rhythm(1.5)}`,
-      textAlign: 'right'
+      textAlign: 'right',
+      fontWeight: 'normal'
     }}
   >
     <Link

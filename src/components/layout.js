@@ -2,11 +2,7 @@ import React from 'react'
 import styled, { ThemeProvider } from 'styled-components'
 import { StaticQuery, graphql } from 'gatsby'
 
-import { rhythm, scale } from '../utils/typography'
-
-// Import typefaces
-import 'typeface-montserrat'
-import 'typeface-merriweather'
+import { rhythm } from '../utils/typography'
 
 import { BigHeader } from './bigHeader'
 import { SmallHeader } from './smallHeader'

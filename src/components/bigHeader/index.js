@@ -26,7 +26,7 @@ const Link = styled(GatsbyLink)`
   box-shadow: none;
   text-decoration: none;
   color: inherit;
-  font-family: Montserrat, sans-serif;
+  font-weight: normal;
 `;
 
 export const BigHeader = ({ title }) => (
