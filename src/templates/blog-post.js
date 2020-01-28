@@ -18,6 +18,7 @@ const ArrowIcon = styled.img.attrs(() => ({ src: arrowIcon}))`
   margin: 0;
   vertical-align: middle;
   margin-bottom: ${rhythm(.1)};
+  margin-right: ${rhythm(.2)};
 `;
 
 const BackToPosts = styled(GatsbyLink)`
