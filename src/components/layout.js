@@ -11,7 +11,7 @@ import Bio from './Bio'
 
 const Footer = styled.footer`
   text-align: center;
-  padding: 0 20px 80px 0;
+  padding: 0 20px 0 0;
 `;
 
 const Content = styled.div`
@@ -40,6 +40,7 @@ export default ({ children, location }) => (
         cosmicjsSettings(slug: { eq: "general" }) {
           metadata {
             site_heading
+            site_description
             author_name
             author_bio
             author_avatar {
@@ -51,6 +52,7 @@ export default ({ children, location }) => (
     `}
     render={data => {
       const siteTitle = data.cosmicjsSettings.metadata.site_heading
+      const siteDescription = data.cosmicjsSettings.metadata.site_description
       const author = data.cosmicjsSettings.metadata;
 
       let rootPath = `/`
@@ -64,7 +66,7 @@ export default ({ children, location }) => (
       const isHome = location.pathname === rootPath || location.pathname === postsPath;
       return (
         <ThemeProvider theme={theme}>
-          {isHome ? <BigHeader title={siteTitle} /> : <SmallHeader title={siteTitle} /> }
+          {isHome ? <BigHeader title={siteTitle} subtitle={siteDescription}/> : <SmallHeader title={siteTitle} /> }
           <Content>
             <WidthWrapper>
               {children}

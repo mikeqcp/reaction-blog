@@ -15,6 +15,13 @@ const Container = styled.div`
   justify-content: center;
 `;
 
+const Subtitle = styled.p`
+  align-self: flex-end;
+  position: absolute;
+  margin-top: 0;
+  ${fontSize(-0.1)};
+`;
+
 const Title = styled.h1`
   margin: 0;
   text-align: center;
@@ -29,10 +36,12 @@ const Link = styled(GatsbyLink)`
   font-weight: normal;
 `;
 
-export const BigHeader = ({ title }) => (
+export const BigHeader = ({ title, subtitle }) => (
   <Container>
     <Title>
       <Link to={'/'}>{title}</Link>
     </Title>
+
+    <Subtitle>{subtitle}</Subtitle>
   </Container>
 )
