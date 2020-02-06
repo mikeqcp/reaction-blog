@@ -13,8 +13,41 @@ const List = styled.ul`
   margin: 0;
 `
 const ListItem = styled.li`
-  &:not(:first-child) {
-    border-top: 1px solid;
+  transition: transform .1s ease-in-out;
+  will-change: transform;
+  padding-bottom: 1px;
+  padding-right: ${rhythm(1)};
+  
+  &:after {
+    content: '';
+    position: absolute;
+    height: 1px;
+    background: black;
+    width: 100%;
+    transition: transform .25s ease-in-out;
+    transform-origin: right;
+  }
+  
+  &:before {
+    content: '';
+    position: absolute;
+    height: 100%;
+    background: black;
+    width: 1px;
+    right: 0px;
+    top: 0;
+    transition: transform .25s ease-in-out;
+    transform: scaleY(0);
+    transform-origin: bottom;
+  }
+  
+  &:hover {
+    &:after {
+      transform: scaleX(0.5)
+    }
+    &:before {
+      transform: scaleY(.5)
+    }
   }
 `
 const Title = styled.h1`

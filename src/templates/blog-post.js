@@ -19,6 +19,11 @@ const ArrowIcon = styled.img.attrs(() => ({ src: arrowIcon}))`
   vertical-align: middle;
   margin-bottom: ${rhythm(.1)};
   margin-right: ${rhythm(.2)};
+  transition: transform .15s ease-in-out;
+  
+  a:hover & {
+    transform: translateX(-5px);
+  }
 `;
 
 const BackToPosts = styled(GatsbyLink)`
