@@ -32,7 +32,7 @@ const Hero = styled(Image)`
   width: 100%;
   height: ${rhythm(10)};
 `;
-const CreatedDate = styled.div`
+const CreatedDate = styled.time`
   display: block;
   margin-bottom: ${rhythm(.6)};
   margin-top: ${rhythm(-.3)};
